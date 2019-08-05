@@ -1,0 +1,49 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color:#5f5f5f;
+}
+
+div.header{
+    position: absolute;
+    width: 100%;
+    
+    top:1em;
+    margin: 0 auto;
+    
+}
+
+p.title {
+    text-align: center;
+    margin: 0;
+    
+    color: #FFF;
+font-size: 1.2em;
+text-shadow: 1px 1px 3px #000;
+}
+
+p.name {
+    text-align: center;
+    margin: 0;
+    
+    color: #FFF;
+font-size: 0.8em;
+text-shadow: 1px 1px 3px #000;
+}
+
+div.content {
+    
+    width: 300px;
+    height: 300px;
+
+    margin: 0 auto;
+    margin-top: 100px;
+    
+    background-color:#ffffff;
+      
+}
+
+canvas.myCanvas{
+  box-shadow: 0 2px 5px #000;
+}
