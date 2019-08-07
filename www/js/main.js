@@ -20,36 +20,37 @@ let setup = () => {
   nameTag.textContent = "201812121 Nishizawa Kanade";
   shapes = new Array();
 
-  for (let i = 0; i < 2; i++) {
+  let bg = new createjs.Shape();
+  bg.graphics
+    .beginFill("black")
+    .drawRect(0, 0, 300, 300)
+    .beginLinearGradientFill(["#9ef", "#9e2"], [0.1, 1.0], 0, -100, 50, 100);
+  stage.addChild(bg);
+
+  for (let i = 0; i < 200; i++) {
     let s = new createjs.Shape();
     let angle = 0;
-    let radius = 25;
-    let speed = 0.05;
+    let radius = 50;
+    let speed = 0.01;
     let centerHue = 180;
 
     createjs.Ticker.addEventListener("tick", handleTick);
     function handleTick() {
       let hue = centerHue + Math.cos(angle) * radius;
-      let color = "hsl(" + hue + ", 100%, 50%)";
+      let color = "hsl(" + hue + ", 90%, 50%)";
       s.graphics.beginStroke(color);
-      s.graphics.setStrokeStyle(7);
-      s.graphics.drawRect(0, 0, 50, 50);
+      s.graphics.setStrokeStyle(0.1);
+      s.graphics.drawRect(0, 0, 20, 16);
       angle += speed;
     }
     s.alpha = 0;
-    s.x = 150;
-    s.y = 150;
-    s.regX = 25;
-    s.regY = 25;
+    s.x = 160;
+    s.y = 160;
+    s.regX = 10;
+    s.regY = 7;
 
     stage.addChild(s);
     shapes.push(s);
-
-    createjs.Tween.get(s).to(
-      { rotation: 290, scaleX: 10, scaleY: 10, alpha: 0.7 },
-      2000,
-      createjs.Ease.cubicIn
-    );
   }
 };
 
@@ -62,25 +63,19 @@ let loop = () => {
     oldSeconds = sec;
     update = true;
   }
-  //shapes[0]を円軌道で動かす
-  // let shape0 = shapes[0];
-  // shape0.x = Math.cos((r - 90) * (Math.PI / 180)) * 130 + 150;
-  // shape0.y = Math.sin((r - 90) * (Math.PI / 180)) * 130 + 150;
-  //   for (let i = 0; i < 29; i++) {
-  //     let s = shapes[i];
 
-  //     if (s.x >= 300 || s.x <= 0) {
-  //       s.vx *= -1;
-  //       s.x += s.vx;
-  //     } else {
-  //       s.x += s.vx;
-  //     }
-
-  //     if (s.y >= 300 || s.y <= 0) {
-  //       s.vy *= -1;
-  //       s.y += s.vy;
-  //     } else {
-  //       s.y += s.vy;
-  //     }
-  //   }
+  for (let i = 1; i < 200; i++) {
+    let s = shapes[i];
+    createjs.Tween.get(s)
+      .wait(i * 150)
+      .to(
+        { rotation: 140, scaleX: 32, scaleY: 30, alpha: 0.1 },
+        3500,
+          createjs.Ease.quadIn)
+        .call(remove);
+      
+      function remove() {
+         stage.removeChild(s)
+      }
+  }
 };
